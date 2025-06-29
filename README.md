@@ -1,129 +1,122 @@
-```markdown
 # RULEN: Real-Time Unified Lecture Extraction Network
 
-Automate multilingual lecture transcription, structured note generation, and adaptive quiz/assessment creation with a single AI-driven toolkit. RULEN is designed for both students and educators, supporting bilingual and multilingual classrooms with seamless integration of audio, supplementary materials, and learning outcomes.
+**RULEN** is an AI-powered, end-to-end multilingual educational assistant that automates lecture transcription, bilingual note generation, and curriculum-aligned quiz/assessment creation. Designed for both students and educators, RULEN simplifies academic workflows with modern AI models, intuitive dashboards, and intelligent retrieval-augmented learning tools.
 
 ---
 
-## 🚀 Features
+## 🚀 Key Features
 
-- **Automatic Speech Recognition:**  
-  Transcribe lecture audio in 99+ languages using OpenAI Whisper (supports large-v3, small, and tiny models).
+- 🎤 **Automatic Speech Recognition**  
+  Transcribe lectures in 99+ languages using OpenAI Whisper (supports large-v3, small, tiny models).
 
-- **Multilingual Note Generation:**  
-  Generate structured notes in English, Roman Urdu/Hindi, or any language supported by Whisper. Download notes as .docx files.
+- 📝 **Multilingual Note Generation**  
+  Generate structured notes in Roman Urdu/Hindi and English. Export as `.docx` for offline study.
 
-- **Quiz & Assessment Creation:**  
-  Prepare customizable quizzes (MCQ, short, long) and teacher assessments (quiz, assignment, midterm, final) using retrieval-augmented generation (RAG) and FAISS vector search.
+- 🧠 **Quiz & Assessment Creation**  
+  Build MCQs, short/long questions, assignments, and exams with FAISS-powered semantic search and RAG.
 
-- **Student & Teacher Dashboards:**  
-  Students: Upload audio, receive notes, and generate quizzes.  
-  Teachers: Upload audio/materials/CLOs, generate outcome-aligned assessments.
+- 👨‍🎓👩‍🏫 **Dual Dashboards**  
+  - **Students**: Upload audio → receive notes → prepare for quizzes
+  - **Teachers**: Upload lectures/materials/CLOs → generate curriculum-aligned assessments
 
-- **Supplementary Material Support:**  
-  Upload PDFs, PPTX, DOCX, or TXT files to enhance the knowledge base and quiz generation.
+- 📄 **Supplementary Material Integration**  
+  Upload PDFs, PPTX, DOCX, and TXT documents to expand knowledge base.
 
-- **CLO/PLO Alignment:**  
-  Teachers can upload Course Learning Outcomes (CLOs) and Program Learning Outcomes (PLOs) for curriculum-aligned assessment creation.
+- 🎯 **CLO/PLO Mapping**  
+  Automatically align questions with institutional outcomes for accreditation readiness.
 
-- **Modern Web Interface:**  
-  Built with Flask and Jinja2; supports session management, file uploads, and multi-step workflows.
+- 🌐 **Modern Web Interface**  
+  Built on Flask and Jinja2 with responsive UI, file management, and role-based workflows.
 
 ---
 
 ## 📦 Getting Started
 
-1. **Clone the repository:**
-   ```
-   git clone https://github.com/SyedBurhanAhmed/RULEN-Real-time-Unified-Lecture-Extraction-Network.git
-   cd RULEN-Real-time-Unified-Lecture-Extraction-Network
-   ```
+1. **Clone the Repository:**
+```bash
+git clone https://github.com/SyedBurhanAhmed/RULEN-Real-time-Unified-Lecture-Extraction-Network.git
+cd RULEN-Real-time-Unified-Lecture-Extraction-Network
+```
 
-2. **Install dependencies:**
-   ```
-   pip install -r requirements.txt
-   ```
+2. **Install Dependencies:**
+```bash
+pip install -r requirements.txt
+```
 
 3. **Install Whisper and FFmpeg:**
+```bash
+pip install git+https://github.com/openai/whisper.git
+```
 
-   - **Install Whisper (from GitHub):**
-     ```
-     pip install git+https://github.com/openai/whisper.git
-     ```
+- **Install FFmpeg**:
+  - Ubuntu/Debian:
+    ```bash
+    sudo apt update && sudo apt install ffmpeg
+    ```
+  - MacOS:
+    ```bash
+    brew install ffmpeg
+    ```
+  - Windows: [Download from ffmpeg.org](https://ffmpeg.org/download.html) and add to system PATH.
 
-   - **Install FFmpeg:**
-     - On Ubuntu/Debian:
-       ```
-       sudo apt-get update
-       sudo apt-get install ffmpeg
-       ```
-     - On Mac (with Homebrew):
-       ```
-       brew install ffmpeg
-       ```
-     - On Windows:  
-       Download from [https://ffmpeg.org/download.html](https://ffmpeg.org/download.html) and add FFmpeg to your system PATH.
+4. **Configure Environment:**
+Edit the `.env` file for:
+```
+WHISPER_MODEL=small
+EMBEDDING_MODEL=all-MiniLM-L6-v2
+UPLOAD_FOLDER=./uploads
+FAISS_INDEX_PATH=./faiss_index
+```
+⚠️ Never commit `.env` or credentials. Add it to `.gitignore`.
 
-   **Note:**  
-   Whisper requires FFmpeg to be installed and accessible from your command line. If FFmpeg is not installed, Whisper will not work.
+5. **Run the Application:**
+```bash
+python app.py
+```
 
-4. **Configure environment:**
-   - Edit `.env` for model selection, API keys, and paths.
-   - **Important:** Never commit your `.env` or credentials files to the repository. Add `.env` to your `.gitignore`.
-
-5. **Run the application:**
-   ```
-   python app.py
-   ```
-
-6. **Access the dashboard:**  
-   Open [http://localhost:5000](http://localhost:5000) in your browser.
+6. **Access the Dashboard:**
+Visit [http://localhost:5000](http://localhost:5000)
 
 ---
 
-## 🌐 Google API Initialization
-
-To use Google APIs (for authentication, storage, or other integrations):
+## 🌐 Google API Integration (Optional)
 
 1. **Create a Google Cloud Project:**  
-   [Google Cloud Console](https://console.cloud.google.com/)
+   Enable required APIs (Drive, Sheets, etc.)
 
-2. **Enable the required APIs** (e.g., Google Drive API).
+2. **Download OAuth credentials (JSON)**  
+   Reference it in `.env`.
 
-3. **Create and download credentials** (OAuth client or service account) as a JSON file.
+3. **Install Required Libraries:**
+```bash
+pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
+```
 
-4. **Add the credentials JSON path to your `.env` file** (never commit this file).
-
-5. **Install Google API Python client libraries:**
-   ```
-   pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
-   ```
-
-6. **Authenticate in your code** using the credentials file.
+4. **Authenticate in Code**
+Follow Google documentation for using OAuth or Service Accounts securely.
 
 ---
 
 ## 📊 Example Results
 
-- **Hindi Lecture:**  
-  [CodeWithHarry Video](https://youtu.be/ajeTYqhRHno?si=t7xXbVLXNVZGTuqS)  
-  Transcribed and generated notes in Roman Hindi and English, with .docx export and quiz generation.
+- **Hindi Lecture** ([CodeWithHarry](https://youtu.be/ajeTYqhRHno))  
+  > Transcribed → Roman Hindi/English Notes → Quiz Created → .docx Exported
 
-- **English Lecture:**  
-  [deeplearning.ai Video](https://youtu.be/dLc-lfEEYss?si=9Xvc8RkON--tabCa)  
-  Transcribed and generated notes in English, with .docx export and quiz generation.
+- **English Lecture** ([deeplearning.ai](https://youtu.be/dLc-lfEEYss))  
+  > Transcribed → English Notes → Quiz Generated → .docx Delivered
 
 ---
 
 ## 📁 Project Structure
 
-```
+```bash
 rulen-lecture-extraction/
 ├── app.py
 ├── requirements.txt
-├── templates/
-│   └── results.html
 ├── static/
+├── templates/
+│   ├── base.html
+│   └── results.html
 ├── modules/
 │   ├── transcription.py
 │   ├── notes_generation.py
@@ -136,38 +129,41 @@ rulen-lecture-extraction/
 
 ## 🔒 Security & Privacy
 
-- End-to-end encryption for data in transit and at rest.
-- Role-based access control for student/teacher content.
-- No lecture data is shared with third parties.
-- **Never commit API keys or credentials. Always use a `.env` file and add it to `.gitignore`.**
+- End-to-end encryption (HTTPS in production)
+- Role-based access for students and teachers
+- All processing is local — no third-party audio sharing
+- Environment variables secure API keys & configs
 
 ---
 
 ## 📚 References
 
 - [OpenAI Whisper](https://github.com/openai/whisper)
-- [CodeWithHarry YouTube Channel](https://www.youtube.com/@CodeWithHarry)
-- [deeplearning.ai YouTube Channel](https://www.youtube.com/@deeplearningai)
-- See `/docs` for full bibliography and methodology.
+- [FAISS Similarity Search](https://github.com/facebookresearch/faiss)
+- [LangChain Documentation](https://python.langchain.com/)
+- [CodeWithHarry YouTube](https://www.youtube.com/@CodeWithHarry)
+- [deeplearning.ai](https://www.youtube.com/@deeplearningai)
 
 ---
 
-## 📣 Future Advancements
+## 🧭 Future Advancements
 
-- Cloud deployment and LMS integration (Moodle, Canvas, Blackboard)
-- Dedicated lecture recorder device with microcontroller and Wi-Fi
-- Enhanced frontend (React/Vue) and real-time features
-- Advanced security layers and institutional SSO
+- 🔗 LMS Integration: Moodle, Canvas, Blackboard
+- 🌍 Cloud deployment (GCP, Azure, AWS)
+- 🎛️ Dedicated edge device (ESP32 + mic + Wi-Fi)
+- 🖥️ Frontend revamp (React + Tailwind)
+- 🛡️ SSO, JWT-based Auth, and OAuth integrations
 
 ---
 
 ## 🤝 Contributing
 
-Pull requests and suggestions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+Contributions are welcome! 
+Please fork the repo and open a pull request or issue. 
+See [CONTRIBUTING.md](CONTRIBUTING.md) for code style and feature roadmap.
 
 ---
 
 ## 📝 License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
-```
+Licensed under the MIT License. See [LICENSE](LICENSE) for details.
