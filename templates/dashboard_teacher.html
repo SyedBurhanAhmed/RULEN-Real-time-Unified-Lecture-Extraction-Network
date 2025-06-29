@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Teacher Dashboard{% endblock %}
+{% block content %}
+
+<h2 class="text-2xl font-semibold mb-4">📥 Teacher Lecture Upload</h2>
+<p class="mb-6 text-gray-700">Upload your lecture audio and prepare notes for students.</p>
+
+<form action="/teacher_submit_audio" method="POST" enctype="multipart/form-data" class="space-y-4">
+  <!-- Styled Audio Upload -->
+  <label for="audio_file" class="custom-file-upload bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-600 transition inline-block">
+    🎵 Upload Audio File
+    <input type="file" name="audio_file" id="audio_file" accept=".mp3,.wav" required class="hidden">
+  </label>
+  <span id="audio-file-name" class="ml-3 text-gray-700 italic">No file chosen</span>
+
+  <div>
+    <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition">
+      ⬆️ Upload & Transcribe
+    </button>
+  </div>
+</form>
+
+<script>
+  const audioFileInput = document.getElementById("audio_file");
+  const audioFileName = document.getElementById("audio-file-name");
+
+  audioFileInput.addEventListener("change", function () {
+    audioFileName.textContent = this.files[0]?.name || "No file chosen";
+  });
+</script>
+
+{% endblock %}

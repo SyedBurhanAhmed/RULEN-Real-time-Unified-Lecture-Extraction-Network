@@ -1,0 +1,48 @@
+/* Hide the default file input */
+input[type="file"] {
+  display: none;
+}
+
+/* Custom file upload button */
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #4a90e2;
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.custom-file-upload:hover {
+  background-color: #357ab8;
+}
+
+/* Optional file name display */
+#file-name,
+#materials-file-name,
+#clos-file-name {
+  margin-left: 10px;
+  font-style: italic;
+  color: #444;
+}
+
+/* Status notification box */
+.status-box {
+  padding: 16px 24px;
+  margin: 25px 0;
+  border-radius: 8px;
+  font-weight: 600;
+  background-color: #e3f2fd;
+  color: #0d47a1;
+  border-left: 6px solid #2196f3;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Optional utility class fallback */
+.hidden {
+  display: none;
+}

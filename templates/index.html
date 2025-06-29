@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+<div class="flex flex-col items-center justify-center text-center space-y-6 mt-12">
+    <h2 class="text-3xl font-semibold text-gray-800">Choose Your Role</h2>
+
+    <div class="flex flex-col sm:flex-row gap-4 mt-4">
+        <a href="/student" class="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600 transition text-lg">
+            🎓 I'm a Student
+        </a>
+        <a href="/teacher" class="bg-green-500 text-white px-6 py-3 rounded hover:bg-green-600 transition text-lg">
+            👩‍🏫 I'm a Teacher
+        </a>
+    </div>
+</div>
+{% endblock %}

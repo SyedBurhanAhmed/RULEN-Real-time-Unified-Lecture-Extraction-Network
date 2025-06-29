@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Lecture Notes App{% endblock %}</title>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Alpine.js for interactive components -->
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}" />
+</head>
+
+<body class="bg-slate-900 text-slate-200 min-h-screen flex flex-col">
+
+  <!-- Header -->
+<header role="banner" class="bg-slate-800 text-white shadow-md mb-6">
+  <div class="max-w-7xl mx-auto px-4 py-6 text-center">
+    {% block banner %}
+      <h1 class="text-3xl font-extrabold tracking-wide">📚 RULEN</h1>
+      <p class="text-lg mt-2 text-slate-300 italic">
+        From Lecture Audio to Notes, Quizzes & Assessments – For Students & Educators
+      </p>
+      <p class="text-sm text-slate-500 mt-1 italic">
+        (Originally designed for Roman Urdu, now supporting multilingual lecture workflows)
+      </p>
+    {% endblock %}
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <main role="main" class="flex-grow max-w-7xl mx-auto w-full px-4 py-8 bg-slate-800 rounded-b-lg shadow-inner">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer role="contentinfo" class="bg-slate-950 text-slate-400 text-center text-sm py-4 mt-8">
+    <div class="max-w-7xl mx-auto">
+      <p>&copy; {{ current_year }} RULEN Project. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

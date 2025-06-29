@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Generate Exam Assets{% endblock %}
+
+{% block content %}
+
+<h2 class="text-2xl font-semibold mb-4">🛠️ Generate Exam Content</h2>
+<p class="text-gray-700 mb-6">
+  Select the type of assessment you want to generate based on the lecture, supporting materials, and CLOs/PLOs.
+</p>
+
+<form action="/generate_exam_assets" method="POST" class="space-y-6">
+  <!-- Select Dropdown -->
+  <div>
+    <label for="asset_type" class="block font-medium text-gray-800 mb-2">Choose an Assessment Type:</label>
+    <select
+      name="asset_type"
+      id="asset_type"
+      required
+      class="w-full md:w-1/2 bg-white border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    >
+      <option value="quiz">Quiz</option>
+      <option value="midterm">Midterm</option>
+      <option value="final">Final Exam</option>
+      <option value="assignment">Assignment</option>
+    </select>
+  </div>
+
+  <!-- Generate Button -->
+  <button
+    type="submit"
+    class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition"
+  >
+    🚀 Generate
+  </button>
+</form>
+
+<!-- Back Home Button -->
+<div class="mt-6">
+  <a href="/" class="bg-gray-700 text-white px-6 py-2 rounded hover:bg-gray-800 transition inline-block">
+    🏠 Go Back Home
+  </a>
+</div>
+
+{% endblock %}
