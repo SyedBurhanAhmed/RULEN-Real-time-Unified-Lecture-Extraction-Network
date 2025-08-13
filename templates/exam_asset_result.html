@@ -3,31 +3,35 @@
 
 {% block content %}
 
-<h2 class="text-2xl font-semibold mb-4">📄 {{ asset_type|capitalize }} Successfully Generated</h2>
-<p class="text-gray-700 mb-6">
+<h2 class="text-2xl font-semibold mb-4 text-white">📄 {{ asset_type|capitalize }} Successfully Generated</h2>
+<p class="text-neutral-300 mb-6">
   The following content has been generated using your lecture, uploaded materials, and CLO/PLOs.
   You can download it as a Word document or review it below.
 </p>
 
-<hr class="my-6">
+<hr class="my-6 border-neutral-800">
 
-<h3 class="text-lg font-semibold mb-2">🔍 Preview:</h3>
-<div class="bg-white p-4 rounded shadow text-gray-800 mb-6">
-  <pre class="whitespace-pre-wrap font-sans">{{ result_text | safe }}</pre>
+<h3 class="text-lg font-semibold mb-2 text-white">🔍 Preview:</h3>
+<div class="bg-neutral-900 p-4 rounded-md shadow border border-neutral-800 mb-6 max-h-[500px] overflow-y-auto">
+  <pre class="whitespace-pre-wrap font-sans text-neutral-200 text-sm leading-relaxed">{{ result_text | safe }}</pre>
 </div>
 
-<hr class="my-6">
+<hr class="my-6 border-neutral-800">
 
-<h3 class="text-lg font-semibold mb-2">📥 Download</h3>
-<a href="{{ docx_link }}" class="inline-block bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition mb-4" download>
+<h3 class="text-lg font-semibold mb-2 text-white">📥 Download</h3>
+<a href="{{ docx_link }}"
+   class="inline-block bg-gradient-to-r from-neutral-700 to-neutral-800 hover:from-neutral-600 hover:to-neutral-700 text-white px-6 py-2 rounded-md shadow transition mb-4"
+   download>
   ⬇️ Download {{ asset_type|capitalize }} (.docx)
 </a>
 
 <div class="mt-6 flex flex-col sm:flex-row gap-4">
-  <a href="/teacher" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition text-center">
+  <a href="/teacher"
+     class="bg-gradient-to-r from-green-700 to-green-800 hover:from-green-600 hover:to-green-700 text-white px-6 py-2 rounded-md shadow transition text-center">
     👨‍🏫 Upload Another Lecture
   </a>
-  <a href="/" class="bg-gray-700 text-white px-6 py-2 rounded hover:bg-gray-800 transition text-center">
+  <a href="/"
+     class="bg-gradient-to-r from-neutral-700 to-neutral-800 hover:from-neutral-600 hover:to-neutral-700 text-white px-6 py-2 rounded-md shadow transition text-center">
     🏠 Return to Home
   </a>
 </div>

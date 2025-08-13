@@ -3,32 +3,36 @@
 
 {% block content %}
 
-<h2 class="text-2xl font-semibold mb-4">📄 Upload Additional Materials (Optional)</h2>
+<h2 class="text-2xl font-semibold mb-4 text-white">📄 Upload Additional Materials (Optional)</h2>
 
-<p class="text-gray-700 mb-6">
-  You can upload slides, PDFs, or any supporting documents to help generate richer quiz and exam content.
+<p class="text-neutral-300 mb-6 leading-relaxed">
+  You can upload slides, PDFs, or any supporting documents to help generate
+  richer quiz and exam content.
 </p>
 
 <form action="/teacher_upload_material" method="POST" enctype="multipart/form-data" class="space-y-4 mb-6">
   <!-- Styled Materials Upload -->
-  <label class="custom-file-upload bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-600 transition inline-block">
+  <label class="custom-file-upload bg-gradient-to-r from-neutral-700 to-neutral-800 hover:from-neutral-600 hover:to-neutral-700 text-white px-4 py-2 rounded-md cursor-pointer shadow transition inline-block">
     📄 Upload Material
     <input type="file" name="materials" id="materials" accept=".pdf,.ppt,.pptx,.docx,.txt" required class="hidden">
   </label>
-  <span id="materials-file-name" class="ml-3 text-gray-700 italic">No file chosen</span>
+  <span id="materials-file-name" class="ml-3 text-neutral-400 italic">No file chosen</span>
   <br>
-  <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition">
+  <button type="submit"
+          class="bg-gradient-to-r from-green-700 to-green-800 hover:from-green-600 hover:to-green-700 text-white px-6 py-2 rounded-md shadow transition">
     📤 Upload
   </button>
 </form>
 
 <form action="/teacher_clo_decision" method="POST" class="mb-6">
-  <button type="submit" name="decision" value="no" class="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600 transition">
+  <button type="submit" name="decision" value="no"
+          class="bg-gradient-to-r from-red-700 to-red-800 hover:from-red-600 hover:to-red-700 text-white px-6 py-2 rounded-md shadow transition">
     🚫 Skip, go to CLO/PLO decision
   </button>
 </form>
 
-<a href="/" class="inline-block bg-gray-700 text-white px-6 py-2 rounded hover:bg-gray-800 transition">
+<a href="/"
+   class="inline-block bg-gradient-to-r from-neutral-700 to-neutral-800 hover:from-neutral-600 hover:to-neutral-700 text-white px-6 py-2 rounded-md shadow transition">
   🏠 Go Back Home
 </a>
 

@@ -1,48 +1,61 @@
-/* Hide the default file input */
+/* Hide default file input */
 input[type="file"] {
   display: none;
 }
 
-/* Custom file upload button */
+/* Custom file upload button (Metallic Gray) */
 .custom-file-upload {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 10px 24px;
   cursor: pointer;
-  background-color: #4a90e2;
-  color: #fff;
+  background: linear-gradient(135deg, #2a2a2a, #1a1a1a); /* Metallic dark gray gradient */
+  color: #f5f5f5; /* Off-white text */
   border-radius: 8px;
   font-weight: 500;
-  transition: background-color 0.3s ease;
+  font-size: 14px;
   border: none;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.4px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.35);
+  transition: all 0.25s ease;
 }
 
 .custom-file-upload:hover {
-  background-color: #357ab8;
+  background: linear-gradient(135deg, #3a3a3a, #222222); /* Slightly lighter metallic hover */
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 }
 
 /* Optional file name display */
 #file-name,
 #materials-file-name,
 #clos-file-name {
-  margin-left: 10px;
+  margin-left: 12px;
   font-style: italic;
-  color: #444;
+  color: #d1d5db; /* Light gray (Slate-like) */
+  font-size: 13px;
 }
 
-/* Status notification box */
+/* Status notification box - Neutral Gray Accent */
 .status-box {
-  padding: 16px 24px;
-  margin: 25px 0;
+  padding: 14px 20px;
+  margin: 20px 0;
   border-radius: 8px;
-  font-weight: 600;
-  background-color: #e3f2fd;
-  color: #0d47a1;
-  border-left: 6px solid #2196f3;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  font-weight: 500;
+  font-size: 14px;
+  background: linear-gradient(135deg, #1a1a1a, #141414); /* Dark gradient */
+  color: #e5e5e5;
+  border-left: 5px solid #9ca3af; /* Neutral silver accent */
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
 }
 
-/* Optional utility class fallback */
+/* Utility hidden class */
 .hidden {
   display: none;
+}
+
+/* Dashboard global font & background */
+body {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background: linear-gradient(160deg, #0a0a0a, #1a1a1a); /* Smooth black gradient */
+  color: #f5f5f5; /* Light text for contrast */
 }

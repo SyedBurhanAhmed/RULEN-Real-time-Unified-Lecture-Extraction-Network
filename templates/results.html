@@ -3,40 +3,51 @@
 
 {% block content %}
 
-<hr class="my-6">
+<hr class="my-6 border-neutral-800">
 
-<h3 class="text-lg font-semibold mb-3">📥 Download Generated Notes</h3>
-<a href="{{ docx_link }}" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition inline-block mb-6" download>
+<h3 class="text-lg font-semibold mb-3 text-white">📥 Download Generated Notes</h3>
+<a href="{{ docx_link }}"
+   class="bg-gradient-to-r from-neutral-700 to-neutral-800 hover:from-neutral-600 hover:to-neutral-700 text-white px-6 py-2 rounded-md shadow transition inline-block mb-6"
+   download>
     ⬇️ Download Notes (.docx)
 </a>
 
 {% if show_notes %}
-  <h2 class="text-2xl font-semibold mb-4">📝 Summarized Lecture Notes</h2>
-  <p class="text-gray-700 mb-4"><strong>📌 Detected Language:</strong> {{ result.language }}</p>
+  <h2 class="text-2xl font-semibold mb-4 text-white">📝 Summarized Lecture Notes</h2>
+  <p class="text-neutral-300 mb-4"><strong>📌 Detected Language:</strong> {{ result.language }}</p>
 
   {% if result.converted_text %}
-    <h3 class="text-lg font-medium mb-2">📜 Roman Urdu / Converted Text:</h3>
-    <div class="bg-white p-4 rounded shadow mb-6 text-gray-800">{{ result.converted_text | safe }}</div>
+    <h3 class="text-lg font-medium mb-2 text-white">📜 Roman Urdu / Converted Text:</h3>
+    <div class="bg-neutral-900 p-4 rounded-md shadow border border-neutral-800 mb-6 text-neutral-200 max-h-[300px] overflow-y-auto">
+      {{ result.converted_text | safe }}
+    </div>
   {% endif %}
 
-  <h3 class="text-lg font-medium mb-2">📝 Notes in Local Language:</h3>
-  <div class="bg-white p-4 rounded shadow mb-6 text-gray-800">{{ result.notes_local | safe }}</div>
+  <h3 class="text-lg font-medium mb-2 text-white">📝 Notes in Local Language:</h3>
+  <div class="bg-neutral-900 p-4 rounded-md shadow border border-neutral-800 mb-6 text-neutral-200 max-h-[300px] overflow-y-auto">
+    {{ result.notes_local | safe }}
+  </div>
 
-  <h3 class="text-lg font-medium mb-2">📝 Notes in English:</h3>
-  <div class="bg-white p-4 rounded shadow mb-6 text-gray-800">{{ result.notes_english | safe }}</div>
+  <h3 class="text-lg font-medium mb-2 text-white">📝 Notes in English:</h3>
+  <div class="bg-neutral-900 p-4 rounded-md shadow border border-neutral-800 mb-6 text-neutral-200 max-h-[300px] overflow-y-auto">
+    {{ result.notes_english | safe }}
+  </div>
 
-  <hr class="my-6">
+  <hr class="my-6 border-neutral-800">
 
+  <!-- Quiz Prep Section -->
   <div id="quiz-prep-section" class="mb-6">
-    <h3 class="text-lg font-semibold mb-2">🤖 Ready to Prepare for a Quiz?</h3>
+    <h3 class="text-lg font-semibold mb-2 text-white">🤖 Ready to Prepare for a Quiz?</h3>
     <form action="/prepare_quiz_decision" method="POST" class="inline-block">
       <input type="hidden" name="lecture_notes" value="{{ result.notes_english }}">
-      <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition mr-2" name="decision" value="yes" type="submit">
+      <button class="bg-gradient-to-r from-green-700 to-green-800 hover:from-green-600 hover:to-green-700 text-white px-4 py-2 rounded-md shadow transition mr-2"
+              name="decision" value="yes" type="submit">
         ✅ Yes, prepare quiz!
       </button>
     </form>
     <form action="/prepare_quiz_decision" method="POST" class="inline-block">
-      <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition" name="decision" value="no" type="submit">
+      <button class="bg-gradient-to-r from-red-700 to-red-800 hover:from-red-600 hover:to-red-700 text-white px-4 py-2 rounded-md shadow transition"
+              name="decision" value="no" type="submit">
         ❌ No, notes are enough
       </button>
     </form>
@@ -45,19 +56,22 @@
 
 {% if show_material_upload %}
   <div id="material-upload-section" class="mb-8">
-    <h3 class="text-lg font-semibold mb-2">📄 Do you have more relevant materials (PDFs/slides)?</h3>
+    <h3 class="text-lg font-semibold mb-2 text-white">📄 Do you have more relevant materials (PDFs/slides)?</h3>
     <form action="/upload_material" method="POST" enctype="multipart/form-data" class="mb-4 space-y-4">
-      <label class="custom-file-upload bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-600 transition inline-block">
+      <label class="custom-file-upload bg-gradient-to-r from-neutral-700 to-neutral-800 hover:from-neutral-600 hover:to-neutral-700 text-white px-4 py-2 rounded-md cursor-pointer shadow transition inline-block">
         📚 Upload Material
         <input type="file" name="materials" id="materials" accept=".pdf,.ppt,.pptx,.txt" class="hidden">
       </label>
-      <span id="materials-file-name" class="ml-3 text-gray-700 italic">No file chosen</span>
+      <span id="materials-file-name" class="ml-3 text-neutral-400 italic">No file chosen</span>
       <br>
-      <button class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition" type="submit">📤 Upload File</button>
+      <button class="bg-gradient-to-r from-green-700 to-green-800 hover:from-green-600 hover:to-green-700 text-white px-6 py-2 rounded-md shadow transition" type="submit">
+        📤 Upload File
+      </button>
     </form>
 
     <form action="/material_decision" method="POST">
-      <button class="bg-gray-700 text-white px-6 py-2 rounded hover:bg-gray-800 transition" name="material_decision" value="no" type="submit">
+      <button class="bg-gradient-to-r from-neutral-700 to-neutral-800 hover:from-neutral-600 hover:to-neutral-700 text-white px-6 py-2 rounded-md shadow transition"
+              name="material_decision" value="no" type="submit">
         No, continue without more material
       </button>
     </form>
@@ -66,23 +80,24 @@
 
 {% if show_quiz_assistant %}
   <div id="quiz-agent-launch" class="mb-8">
-    <h3 class="text-lg font-semibold mb-2">🧠 Launch Quiz Assistant</h3>
+    <h3 class="text-lg font-semibold mb-2 text-white">🧠 Launch Quiz Assistant</h3>
     <form action="/start_quiz_assistant" method="POST" class="space-y-4">
-      <label for="type" class="block text-gray-700 font-medium">Select Quiz Type:</label>
-      <select name="type" id="type" class="w-full md:w-1/2 bg-white border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+      <label for="type" class="block text-neutral-200 font-medium">Select Quiz Type:</label>
+      <select name="type" id="type"
+              class="w-full md:w-1/2 bg-neutral-900 border border-neutral-700 rounded-md px-4 py-2 text-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-500">
         <option value="all">All Types</option>
         <option value="mcq">Multiple Choice</option>
         <option value="short">Short Answer</option>
         <option value="long">Long Answer</option>
       </select>
-      <button class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition" type="submit">
+      <button class="bg-gradient-to-r from-neutral-700 to-neutral-800 hover:from-neutral-600 hover:to-neutral-700 text-white px-6 py-2 rounded-md shadow transition" type="submit">
         📝 Help Me Prepare for Quiz
       </button>
     </form>
   </div>
 {% endif %}
 
-<a href="/" class="inline-block bg-gray-700 text-white px-6 py-2 rounded hover:bg-gray-800 transition mt-4">
+<a href="/" class="inline-block bg-gradient-to-r from-neutral-700 to-neutral-800 hover:from-neutral-600 hover:to-neutral-700 text-white px-6 py-2 rounded-md shadow transition mt-4">
   🏠 Go Back Home
 </a>
 

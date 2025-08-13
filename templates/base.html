@@ -5,43 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}Lecture Notes App{% endblock %}</title>
 
-  <!-- Tailwind CSS via CDN -->
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Alpine.js for interactive components -->
+  <!-- Alpine.js -->
   <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
+  <!-- Custom Styles -->
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
   <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}" />
 </head>
 
-<body class="bg-slate-900 text-slate-200 min-h-screen flex flex-col">
+<body class="bg-gradient-to-br from-neutral-900 via-neutral-950 to-neutral-900 text-neutral-100 min-h-screen flex flex-col font-sans">
 
-  <!-- Header -->
-<header role="banner" class="bg-slate-800 text-white shadow-md mb-6">
-  <div class="max-w-7xl mx-auto px-4 py-6 text-center">
-    {% block banner %}
-      <h1 class="text-3xl font-extrabold tracking-wide">📚 RULEN</h1>
-      <p class="text-lg mt-2 text-slate-300 italic">
-        From Lecture Audio to Notes, Quizzes & Assessments – For Students & Educators
-      </p>
-      <p class="text-sm text-slate-500 mt-1 italic">
-        (Originally designed for Roman Urdu, now supporting multilingual lecture workflows)
-      </p>
+  <!-- HEADER -->
+  <header role="banner" class="bg-gradient-to-r from-neutral-950 via-neutral-900 to-neutral-950 shadow-lg border-b border-neutral-800">
+    <div class="max-w-7xl mx-auto px-6 py-6 text-center">
+      {% block banner %}
+        <h1 class="text-4xl font-extrabold tracking-wide text-white">📚 RULEN</h1>
+        <p class="text-lg mt-3 text-neutral-300 italic">
+          From Lecture Audio to Notes, Quizzes & Assessments – For Students & Educators
+        </p>
+        <p class="text-sm text-neutral-500 mt-1 italic">
+          (Originally designed for Roman Urdu, now supporting multilingual lecture workflows)
+        </p>
+      {% endblock %}
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main role="main" class="flex-grow max-w-7xl mx-auto w-full px-6 py-8 bg-gradient-to-b from-neutral-950 to-neutral-900 rounded-b-lg shadow-inner border border-neutral-800">
+    {% block content %}
+    <!-- Page-specific content goes here -->
     {% endblock %}
-  </div>
-</header>
-
-
-  <!-- Main Content -->
-  <main role="main" class="flex-grow max-w-7xl mx-auto w-full px-4 py-8 bg-slate-800 rounded-b-lg shadow-inner">
-    {% block content %}{% endblock %}
   </main>
 
-  <!-- Footer -->
-  <footer role="contentinfo" class="bg-slate-950 text-slate-400 text-center text-sm py-4 mt-8">
+  <!-- FOOTER -->
+  <footer role="contentinfo" class="bg-neutral-950 border-t border-neutral-800 text-neutral-400 text-center text-sm py-5 mt-8">
     <div class="max-w-7xl mx-auto">
-      <p>&copy; {{ current_year }} RULEN Project. All rights reserved.</p>
+      <p>&copy; {{ current_year }} <span class="text-white font-semibold">RULEN Project</span>. All rights reserved.</p>
     </div>
   </footer>
 
