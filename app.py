@@ -240,9 +240,22 @@ def teacher_submit_audio():
     audio.save(filepath)
 
     try:
+        # Transcribe audio
         transcript, lang = transcribe_audio_agent(filepath)
-        session['teacher_transcript'] = transcript
+
+        # Save the transcript text to a new file (e.g., in a transcripts folder)
+        transcripts_folder = os.path.join(UPLOAD_FOLDER, "transcripts")
+        os.makedirs(transcripts_folder, exist_ok=True)
+        transcript_filename = os.path.splitext(filename)[0] + "_transcript.txt"
+        transcript_path = os.path.join(transcripts_folder, transcript_filename)
+
+        with open(transcript_path, "w", encoding="utf-8") as f:
+            f.write(transcript)
+
+        # Store only the transcript file path as a reference in the session
+        session['teacher_transcript_file'] = transcript_path
         session['teacher_language'] = lang
+
     except Exception as e:
         return f"Transcription failed: {e}", 500
 
@@ -335,18 +348,39 @@ def upload_clos():
         return f"❌ Error reading CLO file: {str(e)}", 500
 
     session['clos_text'] = clos_text
-    return redirect(url_for('generate_exam_assets'))
 
+    return redirect(url_for('generate_exam_assets'))
 
 @app.route('/generate_exam_assets', methods=['GET', 'POST'])
 def generate_exam_assets():
     if request.method == 'GET':
         return render_template("generate_assets_form.html")
 
-    asset_type = request.form['asset_type']
+    asset_type = request.form['asset_type']  # e.g., "quiz", "mid", "final"
     clos_text = session.get("clos_text", "")
+    materials_uploaded = session.get("material_uploaded", False)
+
+    # Instead of storing transcript text in session, session stores transcript file path
+    transcript_text = ""
+    transcript_file = session.get("teacher_transcript_file", None)
+    if transcript_file and os.path.exists(transcript_file):
+        with open(transcript_file, "r", encoding="utf-8") as f:
+            transcript_text = f.read()
+
+    combined_text = ""
+    if transcript_text.strip():
+        combined_text += f"**Lecture Transcript:**\n{transcript_text}\n\n"
+    print(materials_uploaded)
+    if materials_uploaded:
+        combined_text += "**Supplementary Materials:**\n(Use the uploaded lecture materials in the vectorstore for factual accuracy.)\n\n"
+
+    if clos_text.strip():
+        combined_text += f"**CLOs/PLOs:**\n{clos_text}\n"
+    else:
+        combined_text += "**CLOs/PLOs:** No CLOs/PLOs provided.\n"
+
     try:
-        generated_text = generate_assets(vectorstore, clos_text, asset_type)
+        generated_text = generate_assets(vectorstore, combined_text, asset_type)
     except Exception as e:
         return f"❌ Exam generation failed: {str(e)}", 500
 
@@ -355,11 +389,12 @@ def generate_exam_assets():
     docx_link = url_for("download_docx", filename=os.path.basename(docx_path))
 
     return render_template(
-            "exam_asset_result.html",
+        "exam_asset_result.html",
         asset_type=asset_type,
         result_text=generated_text,
         docx_link=docx_link
     )
+
 
 if __name__ == '__main__':
     # app.run(debug=True)

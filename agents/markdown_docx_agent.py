@@ -5,7 +5,6 @@ import re
 
 DOCX_FOLDER = "output"
 os.makedirs(DOCX_FOLDER, exist_ok=True)
-
 def save_markdown_docx(markdown_text: str, filename: str) -> str:
     doc = Document()
 
@@ -22,21 +21,28 @@ def save_markdown_docx(markdown_text: str, filename: str) -> str:
             doc.add_paragraph()
             continue
 
-        # **Bold Heading**
-        if re.match(r"^\*\*(.+?)\*\*$", line):
-            heading = re.findall(r"\*\*(.+?)\*\*", line)[0]
+        # **Bold Heading** (exact match)
+        match_heading = re.match(r"^\*\*(.+?)\*\*$", line)
+        if match_heading:
+            heading = match_heading.group(1).strip()
             doc.add_paragraph(heading, style="Heading 2")
+            continue
 
-        # Numbered list
-        elif re.match(r"^\d+\.\s", line):
-            doc.add_paragraph(line, style="List Number")
+        # Numbered list (remove digit prefix)
+        match_numbered = re.match(r"^(\d+)\.\s+(.*)$", line)
+        if match_numbered:
+            content = match_numbered.group(2).strip()
+            doc.add_paragraph(content, style="List Number")
+            continue
 
-        # Bullet list
-        elif re.match(r"^[-*+]\s", line):
-            doc.add_paragraph(line[2:], style="List Bullet")
+        # Bullet list (remove bullet prefix)
+        if re.match(r"^[-*+]\s+", line):
+            content = re.sub(r"^[-*+]\s+", "", line)
+            doc.add_paragraph(content, style="List Bullet")
+            continue
 
-        else:
-            doc.add_paragraph(line)
+        # Otherwise plain paragraph
+        doc.add_paragraph(line)
 
     # Save DOCX
     filename = filename if filename.endswith(".docx") else f"{filename}.docx"
